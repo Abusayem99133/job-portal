@@ -2,9 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../button";
 import { Carousel, CarouselContent, CarouselItem } from "../carousel";
-import { Card, CardContent } from "../card";
+import { Card, CardContent, CardHeader, CardTitle } from "../card";
 import companies from "../../../data/companies.json";
+import faq from "../../../data/faq.json";
 import Autoplay from "embla-carousel-autoplay";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../accordion";
 const LandingPage = () => {
   return (
     <main className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-20">
@@ -52,8 +59,38 @@ const LandingPage = () => {
         </CarouselContent>
       </Carousel>
       {/* banner */}
-      <section>{/* cards */}</section>
+
+      <img src="../../../../src/assets/images/companies/banner.jpeg" alt="" />
+
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* cards */}
+
+        <Card>
+          <CardHeader>
+            <CardTitle>For Job Seekers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Search and apply for jobs, track applications, and more.</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>For Employers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Post jobs, manage applications, and find the best candidates.</p>
+          </CardContent>
+        </Card>
+      </section>
       {/* Accordion */}
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionContent>
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </main>
   );
 };

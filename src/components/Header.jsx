@@ -15,9 +15,9 @@ const Header = () => {
         <Link>
           <img src="/src/assets/images/logo.png" alt="" className="h-20" />
         </Link>
-        <Button variant="outline">Login</Button>
 
         <div>
+          <Button variant="outline">Login</Button>
           {/* <SignedOut>
             <SignInButton />
           </SignedOut>
