@@ -2,9 +2,28 @@ import React from "react";
 
 const LandingPage = () => {
   return (
-    <div>
-      <h3 className="text-white">This is landing page</h3>
-    </div>
+    <main className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-20">
+      <section className="text-center">
+        <h1 className="flex flex-col items-center justify-center gradient-title text-4xl font-extrabold">
+          Find Your Dream Job{" "}
+          <span>
+            and get{" "}
+            <img
+              className="h-14 sm:h-24 lg:h-32"
+              src="/src/assets/images/logo.png"
+              alt="Hirrd Logo"
+            />
+          </span>
+        </h1>
+      </section>
+      <div>
+        {/* buttons */}
+        {/* carousel */}
+      </div>
+      {/* banner */}
+      <section>{/* cards */}</section>
+      {/* Accordion */}
+    </main>
   );
 };
 
