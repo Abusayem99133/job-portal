@@ -21,24 +21,24 @@ export const router = createBrowserRouter([
         element: <Onboarding />,
       },
       {
-        path: "/job-listing",
+        path: "/jobs-listing",
         element: <JobListing />,
       },
 
       {
-        path: "/job/:id",
+        path: "/jobs/:id",
         element: <JobPage />,
       },
       {
-        path: "/job-post",
+        path: "/jobs-post",
         element: <JobPost />,
       },
       {
-        path: "/save-job",
+        path: "/save-jobs",
         element: <SaveJob />,
       },
       {
-        path: "/my-job",
+        path: "/my-jobs",
         element: <MyJobs />,
       },
     ],
