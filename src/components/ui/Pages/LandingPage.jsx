@@ -4,6 +4,7 @@ import { Button } from "../button";
 import { Carousel, CarouselContent, CarouselItem } from "../carousel";
 import { Card, CardContent } from "../card";
 import companies from "../../../data/companies.json";
+import Autoplay from "embla-carousel-autoplay";
 const LandingPage = () => {
   return (
     <main className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-20">
@@ -35,7 +36,7 @@ const LandingPage = () => {
           </Button>
         </Link>
       </div>
-      <Carousel className="w-full py-10">
+      <Carousel plugins={[Autoplay({ delay: 2000 })]} className="w-full py-10">
         <CarouselContent className="flex gap-5 sm:gap-20 items-center">
           {companies?.map(({ name, id, path }) => {
             return (
