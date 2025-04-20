@@ -1,7 +1,9 @@
+import React from "react";
+
 const LandingPage = () => {
   return (
     <div>
-      <h1 className="text-primary">This is landing page</h1>
+      <h3 className="text-white">This is landing page</h3>
     </div>
   );
 };

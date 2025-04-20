@@ -1,7 +1,9 @@
+import React from "react";
+
 const Onboarding = () => {
   return (
     <div>
-      <h2>This is Onboarding </h2>
+      <h3>this is Onboarding page</h3>
     </div>
   );
 };
