@@ -3,7 +3,7 @@ import React from "react";
 const MyJobs = () => {
   return (
     <div>
-      <h2>My job page</h2>
+      <h2> this is My job page</h2>
     </div>
   );
 };
