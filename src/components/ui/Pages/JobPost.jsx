@@ -7,6 +7,7 @@ const JobPost = () => {
       <h3>it was my last work in this</h3>
       <h3>it was my last work in this</h3>
       <h3>it was my last work in this</h3>
+      <h3>it was my last work in this</h3>
     </div>
   );
 };
