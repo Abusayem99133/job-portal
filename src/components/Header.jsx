@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // 🟢 useLocation import করো
 import { Button } from "./ui/button";
 import {
   SignedIn,
@@ -11,19 +11,22 @@ import {
 import { BriefcaseBusiness, Heart, PenBox } from "lucide-react";
 
 const Header = () => {
+  const location = useLocation(); // 🟢 current location object
   const [showSignIn, setShowSignIn] = useState(false);
-  const [search, setSearch] = useState();
+
   useEffect(() => {
-    if (search.get("sign-in")) {
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get("sign-in")) {
       setShowSignIn(true);
     }
-  }, [search]);
+  }, [location.search]); // 🟢 dependency এখন location.search
+
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
       setShowSignIn(false);
-      setSearch({});
     }
   };
+
   return (
     <>
       <nav className="py-4 flex justify-between items-center text-center ">
@@ -39,7 +42,6 @@ const Header = () => {
           </SignedOut>
           <SignedIn>
             <Link to={"/job-post"}>
-              {/* add a condition here */}
               <Button variant="destructive" className="rounded-full">
                 <PenBox size={20} className="mr-2" />
                 Post a Job
