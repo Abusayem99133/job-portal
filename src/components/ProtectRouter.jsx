@@ -16,6 +16,12 @@ const ProtectRouter = ({ children }) => {
   if (!isSignedIn) {
     return <Navigate to={"/?sign-in=true"} state={{ from: pathname }} />;
   }
+  if (
+    user !== undefined &&
+    !user?.unsafeMetadata?.role &&
+    pathname !== "/onboarding"
+  )
+    return <Navigate to={"/onboarding"} />;
 
   // সাইন ইন করা থাকলে কন্টেন্ট দেখাও
   return children;
