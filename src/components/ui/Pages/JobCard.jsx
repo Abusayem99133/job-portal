@@ -1,9 +1,11 @@
 import { useUser } from "@clerk/clerk-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../card";
 import { Heart, MapPinIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "../button";
+import useFetch from "@/hook/useFatch";
+import { saveJobs } from "@/api/apiJobs";
 
 const JobCard = ({
   job,
@@ -11,7 +13,32 @@ const JobCard = ({
   savedInit = false,
   onJobSaved = () => {},
 }) => {
+  const [saved, setSaved] = useState(savedInit);
   const { user } = useUser();
+
+  // useFetch receives saveJobs and options (like alreadySaved)
+  const {
+    fn: fnSavedJob,
+    data: savedJob,
+    loading: loadingSavedJob,
+  } = useFetch(saveJobs, {
+    alreadySaved: saved, // we pass saved state here
+  });
+
+  const handleSaveJob = async () => {
+    await fnSavedJob({
+      user_id: user.id,
+      job_id: job.id,
+    });
+    onJobSaved();
+  };
+
+  useEffect(() => {
+    if (savedJob !== undefined) {
+      setSaved(savedJob?.length > 0);
+    }
+  }, [savedJob]);
+
   return (
     <Card>
       <CardHeader>
@@ -34,7 +61,7 @@ const JobCard = ({
           </div>
         </div>
         <hr />
-        {job?.description?.substring(0, job?.description.indexOf("."))}
+        {job?.description?.substring(0, job?.description?.indexOf("."))}
       </CardContent>
       <CardFooter className="flex gap-2">
         <Link to={`/jobs/${job?.id}`} className="flex-1">
@@ -42,7 +69,20 @@ const JobCard = ({
             More Details
           </Button>
         </Link>
-        <Heart size={20} stroke="red" fill="red" />
+        {!isMyJob && (
+          <Button
+            variant="outline"
+            className="w-15"
+            onClick={handleSaveJob}
+            disabled={loadingSavedJob}
+          >
+            {saved ? (
+              <Heart size={20} stroke="red" fill="red" />
+            ) : (
+              <Heart size={20} />
+            )}
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
