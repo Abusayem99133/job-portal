@@ -4,6 +4,9 @@ import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import JobCard from "./JobCard";
+import { getCompanies } from "@/api/apiCompany";
+import { Input } from "../input";
+import { Button } from "../button";
 
 const JobListing = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,15 +22,43 @@ const JobListing = () => {
     company_id,
     searchQuery,
   });
+  const { fn: fnCompanies, data: companies } = useFetch(getCompanies);
+  useEffect(() => {
+    if (isLoaded) fnCompanies();
+  }, [isLoaded]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData(e.target);
+    const query = formData.get("search-query");
+    if (query) setSearchQuery(query);
+  };
   useEffect(() => {
     if (isLoaded) fnJobs();
   }, [isLoaded, location, company_id, searchQuery]);
+
   return (
     <div>
       <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
         Latest Jobs
       </h1>
       {/* add filters here */}
+
+      <form
+        onSubmit={handleSearch}
+        className="h-14 flex w-full gap-2 items-center mb-3"
+      >
+        <Input
+          type="text"
+          placeholder="Search Jobs by Title.."
+          className="h-full flex-1 px-4 text-md"
+          name="search-query"
+        />
+        <Button type="submit" className="h-full sm:w-28" variant="blue">
+          Search
+        </Button>
+      </form>
       {/* {loadingJobs && (
         <BarLoader className="mt-4 " width={"100%"} color="#36d7b7" />
       )} */}
