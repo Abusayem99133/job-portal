@@ -22,6 +22,7 @@ const JobListing = () => {
   const [location, setLocation] = useState("");
   const [company_id, setCompany_id] = useState("");
   const { isLoaded } = useUser();
+
   const {
     fn: fnJobs,
     data: jobs,
@@ -31,6 +32,7 @@ const JobListing = () => {
     company_id,
     searchQuery,
   });
+
   const { fn: fnCompanies, data: companies } = useFetch(getCompanies);
   useEffect(() => {
     if (isLoaded) fnCompanies();
@@ -43,10 +45,15 @@ const JobListing = () => {
     const query = formData.get("search-query");
     if (query) setSearchQuery(query);
   };
+  // location search
   useEffect(() => {
     if (isLoaded) fnJobs();
   }, [isLoaded, location, company_id, searchQuery]);
-
+  const clearFilters = (e) => {
+    setSearchQuery("");
+    setCompany_id("");
+    setLocation("");
+  };
   return (
     <div>
       <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
@@ -68,9 +75,9 @@ const JobListing = () => {
           Search
         </Button>
       </form>
-      <div>
+      <div className="flex flex-col sm:flex-row gap-2">
         <Select value={location} onValueChange={(value) => setLocation(value)}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger>
             <SelectValue placeholder="Filter by Location" />
           </SelectTrigger>
           <SelectContent>
@@ -89,7 +96,7 @@ const JobListing = () => {
           value={company_id}
           onValueChange={(value) => setCompany_id(value)}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger>
             <SelectValue placeholder="Filter by Company" />
           </SelectTrigger>
           <SelectContent>
@@ -104,6 +111,13 @@ const JobListing = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        <Button
+          onClick={clearFilters}
+          variant="destructive"
+          className="sm:w-1/2"
+        >
+          Clear Filters
+        </Button>
       </div>
       {/* {loadingJobs && (
         <BarLoader className="mt-4 " width={"100%"} color="#36d7b7" />
