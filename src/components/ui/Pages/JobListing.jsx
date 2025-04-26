@@ -7,6 +7,15 @@ import JobCard from "./JobCard";
 import { getCompanies } from "@/api/apiCompany";
 import { Input } from "../input";
 import { Button } from "../button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../select";
+import { State } from "country-state-city";
 
 const JobListing = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -59,6 +68,43 @@ const JobListing = () => {
           Search
         </Button>
       </form>
+      <div>
+        <Select value={location} onValueChange={(value) => setLocation(value)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Filter by Location" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {State?.getStatesOfCountry("BD")?.map(({ name }) => {
+                return (
+                  <SelectItem key={name} value={name}>
+                    {name}
+                  </SelectItem>
+                );
+              })}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Select
+          value={company_id}
+          onValueChange={(value) => setCompany_id(value)}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Filter by Company" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {companies?.map(({ name, id }) => {
+                return (
+                  <SelectItem key={name} value={id}>
+                    {name}
+                  </SelectItem>
+                );
+              })}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       {/* {loadingJobs && (
         <BarLoader className="mt-4 " width={"100%"} color="#36d7b7" />
       )} */}
