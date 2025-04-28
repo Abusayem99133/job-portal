@@ -1,4 +1,4 @@
-import { getSingleJob } from "@/api/apiJobs";
+import { getSingleJob, updateHiringStatus } from "@/api/apiJobs";
 import useFetch from "@/hook/useFatch";
 import { useUser } from "@clerk/clerk-react";
 import MDEditor from "@uiw/react-md-editor";
@@ -6,6 +6,15 @@ import { Briefcase, DoorClosed, DoorOpen, MapPinIcon } from "lucide-react";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../select";
+import { State } from "country-state-city";
 
 const JobPage = () => {
   const { user, isLoaded } = useUser();
@@ -17,6 +26,17 @@ const JobPage = () => {
   } = useFetch(getSingleJob, {
     job_id: id,
   });
+  const { loading: loadingHiringStatus, fn: fnHiringStatus } = useFetch(
+    updateHiringStatus,
+    {
+      job_id: id,
+    }
+  );
+
+  const handleStatusChange = (value) => {
+    const isOpen = value === "open";
+    fnHiringStatus(isOpen).then(() => fnJob());
+  };
   console.log(job);
   useEffect(() => {
     if (isLoaded) fnJob();
@@ -54,12 +74,30 @@ const JobPage = () => {
         </div>
       </div>
       {/* hiring status  */}
+
+      {job?.recruiter_id === user?.id && (
+        <Select value={location} onValueChange={handleStatusChange}>
+          <SelectTrigger
+            className={`w-full ${job?.isOpen ? "bg-green-950" : "bg-red-950"}`}
+          >
+            <SelectValue placeholder={job?.isOpen ? "(Open) " : "Close"} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="open">Open</SelectItem>
+            <SelectItem value="closed">Closed</SelectItem>
+          </SelectContent>
+        </Select>
+      )}
       <h2 className="text-2xl sm:text-3xl font-bold">About the job</h2>
       <p className="sm:text-lg ">{job?.description}</p>
       <h2 className="text-2xl sm:text-3xl font-bold">
         What we are looking for
       </h2>
-      <MDEditor.Markdown source={job?.requirments} />
+      <MDEditor.Markdown
+        source={job?.requirments}
+        className="bg-transparent sm:text-lg"
+      />
+      {/* render applications  */}
     </div>
   );
 };
