@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "../select";
 import ApplyJob from "@/components/applyJob";
+import ApplicationCard from "@/components/ApplicationCard";
 
 const JobPage = () => {
   const { user, isLoaded } = useUser();
@@ -112,6 +113,17 @@ const JobPage = () => {
               (ap) => ap?.candidate_id === user?.id
             )}
           />
+        </div>
+      )}
+      {job?.application?.length > 0 && job?.recruiter_id === user?.id && (
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold">Applications</h2>
+
+          {job?.application?.map((application) => {
+            return (
+              <ApplicationCard key={application.id} application={application} />
+            );
+          })}
         </div>
       )}
     </div>
