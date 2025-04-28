@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../select";
-import { State } from "country-state-city";
+import ApplyJob from "@/components/applyJob";
 
 const JobPage = () => {
   const { user, isLoaded } = useUser();
@@ -44,6 +44,7 @@ const JobPage = () => {
   if (!isLoaded || loadingJob) {
     return <BarLoader className="mb-4" width={"100%"} color="" />;
   }
+  console.log(job?.recruiter_id, user?.id);
   return (
     <div className="flex flex-col gap-8 mt-5">
       <div className="flex flex-col-reverse gap-6 md:flex-row justify-between items-center">
@@ -98,6 +99,17 @@ const JobPage = () => {
         className="bg-transparent sm:text-lg"
       />
       {/* render applications  */}
+
+      {job?.recruiter_id !== user.id && (
+        <ApplyJob
+          job={job}
+          user={user}
+          fetchJob={fnJob}
+          applied={job?.application?.find(
+            (ap) => ap?.candidate_id === user?.id
+          )}
+        />
+      )}
     </div>
   );
 };
