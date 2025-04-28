@@ -77,11 +77,13 @@ const JobPage = () => {
       {/* hiring status  */}
 
       {job?.recruiter_id === user?.id && (
-        <Select value={location} onValueChange={handleStatusChange}>
+        <Select onValueChange={handleStatusChange}>
           <SelectTrigger
             className={`w-full ${job?.isOpen ? "bg-green-950" : "bg-red-950"}`}
           >
-            <SelectValue placeholder={job?.isOpen ? "(Open) " : "Close"} />
+            <SelectValue
+              placeholder={`Hiring Status  ${job?.isOpen ? "Open" : "Close"}`}
+            />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="open">Open</SelectItem>
