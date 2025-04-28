@@ -23,8 +23,10 @@ const JobPage = () => {
     return <BarLoader className="mb-4" width={"100%"} color="" />;
   }
   return (
-    <div>
-      <h1>{job?.title}</h1>
+    <div className="flex flex-col-reverse gap-6 md:flex-row justify-between items-center">
+      <h1 className="gradient-title font-extrabold pb-3 text-4xl sm:text-6xl">
+        {job?.title}
+      </h1>
       <img src={job?.company?.logo_url} className="h-12" alt={job?.title} />
     </div>
   );
