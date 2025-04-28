@@ -101,14 +101,16 @@ const JobPage = () => {
       {/* render applications  */}
 
       {job?.recruiter_id !== user.id && (
-        <ApplyJob
-          job={job}
-          user={user}
-          fetchJob={fnJob}
-          applied={job?.application?.find(
-            (ap) => ap?.candidate_id === user?.id
-          )}
-        />
+        <div className="w-full">
+          <ApplyJob
+            job={job}
+            user={user}
+            fetchJob={fnJob}
+            applied={job?.application?.find(
+              (ap) => ap?.candidate_id === user?.id
+            )}
+          />
+        </div>
       )}
     </div>
   );
