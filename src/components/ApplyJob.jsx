@@ -60,7 +60,7 @@ const ApplyJob = ({ user, job, applied = false, fetchJob }) => {
       ...data,
       job_id: job.id,
       candidate_id: user.id,
-      name: user.fullname,
+      name: user.fullName,
       status: "applied",
       resume: data.resume[0],
     }).then(() => {
@@ -68,6 +68,7 @@ const ApplyJob = ({ user, job, applied = false, fetchJob }) => {
       reset();
     });
   };
+  console.log("full name here", name);
   return (
     <div>
       <Drawer open={applied ? false : undefined}>

@@ -20,6 +20,7 @@ import ApplicationCard from "@/components/ApplicationCard";
 const JobPage = () => {
   const { user, isLoaded } = useUser();
   const { id } = useParams();
+  console.log("sayem in this owner ", user);
   const {
     loading: loadingJob,
     data: job,

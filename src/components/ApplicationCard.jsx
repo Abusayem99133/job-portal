@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardTitle } from "./ui/card";
 
 const ApplicationCard = ({ application, isCandidate = false }) => {
+  console.log(application.name);
   return (
     <div>
       <Card>
