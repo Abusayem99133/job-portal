@@ -68,7 +68,7 @@ const ApplyJob = ({ user, job, applied = false, fetchJob }) => {
       reset();
     });
   };
-  console.log("full name here", name);
+  // console.log("full name here", name);
   return (
     <div>
       <Drawer open={applied ? false : undefined}>

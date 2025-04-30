@@ -3,7 +3,7 @@ import { useState } from "react";
 const useFetch = (cb, options = {}) => {
   const [data, setData] = useState(undefined);
   const [loading, setLoading] = useState(null);
-  console.log(data);
+  // console.log(data);
   const [error, setError] = useState(null);
   const { session } = useSession();
   const fn = async (...args) => {

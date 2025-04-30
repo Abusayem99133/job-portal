@@ -20,7 +20,7 @@ import ApplicationCard from "@/components/ApplicationCard";
 const JobPage = () => {
   const { user, isLoaded } = useUser();
   const { id } = useParams();
-  console.log("sayem in this owner ", user);
+  // console.log("sayem in this owner ", user);
   const {
     loading: loadingJob,
     data: job,
@@ -39,14 +39,14 @@ const JobPage = () => {
     const isOpen = value === "open";
     fnHiringStatus(isOpen).then(() => fnJob());
   };
-  console.log(job);
+  // console.log(job);
   useEffect(() => {
     if (isLoaded) fnJob();
   }, [isLoaded]);
   if (!isLoaded || loadingJob) {
     return <BarLoader className="mb-4" width={"100%"} color="" />;
   }
-  console.log(job?.recruiter_id, user?.id);
+  // console.log(job?.recruiter_id, user?.id);
   return (
     <div className="flex flex-col gap-8 mt-5">
       <div className="flex flex-col-reverse gap-6 md:flex-row justify-between items-center">
