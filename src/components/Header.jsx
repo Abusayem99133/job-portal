@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom"; // 🟢 useLocation import করো
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
   SignedIn,
   SignedOut,
   SignIn,
-  SignInButton,
   UserButton,
   useUser,
 } from "@clerk/clerk-react";
 import { BriefcaseBusiness, Heart, PenBox } from "lucide-react";
-import logo from "../../src/assets/images/logo.png";
+import logo from "../../public/images/logo.png";
 const Header = () => {
-  const location = useLocation(); // 🟢 current location object
+  const location = useLocation();
   const [showSignIn, setShowSignIn] = useState(false);
   const { user } = useUser();
   useEffect(() => {
@@ -20,7 +19,7 @@ const Header = () => {
     if (searchParams.get("sign-in")) {
       setShowSignIn(true);
     }
-  }, [location.search]); // 🟢 dependency এখন location.search
+  }, [location.search]);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
