@@ -10,7 +10,7 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { BriefcaseBusiness, Heart, PenBox } from "lucide-react";
-
+import logo from "../../src/assets/images/logo.png";
 const Header = () => {
   const location = useLocation(); // 🟢 current location object
   const [showSignIn, setShowSignIn] = useState(false);
@@ -32,7 +32,7 @@ const Header = () => {
     <>
       <nav className="py-4 flex justify-between items-center text-center ">
         <Link>
-          <img src="/src/assets/images/logo.png" alt="" className="h-20" />
+          <img src={logo} alt="" className="h-20" />
         </Link>
 
         <div className="flex gap-8">
