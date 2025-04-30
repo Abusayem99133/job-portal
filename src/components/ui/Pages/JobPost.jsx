@@ -22,6 +22,7 @@ import { Textarea } from "../textarea";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "../button";
 import { addNewJob } from "@/api/apiJobs";
+import AddCompanyDrawer from "@/components/AddCompanyDrawer";
 const schema = z.object({
   title: z.string().min(1, { message: "Title is required" }),
   description: z.string().min(1, { message: "Description is required" }),
@@ -147,7 +148,7 @@ const JobPost = () => {
             )}
           />
 
-          {/* add company drawer */}
+          <AddCompanyDrawer fetchCompanies={fnCompanies} />
 
           {errors.location && (
             <p className="text-red-500">{errors.location.message}</p>
