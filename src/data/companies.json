@@ -1,42 +1,42 @@
 [
     {
       "name": "amazon",
-      "path": "../../public/images/companies/amazon.svg",
+      "path": "/images/companies/amazon.svg",
       "id": 1
     },
     {
       "name": "atlassian",
-      "path": "../../public/images/companies/atlassian.svg",
+      "path": "/images/companies/atlassian.svg",
       "id": 2
     },
     {
       "name": "google",
-      "path": "../../public/images/companies/google.webp",
+      "path": "/images/companies/google.webp",
       "id": 3
     },
     {
       "name": "ibm",
-      "path": "../../public/images/companies/ibm.svg",
+      "path": "/images/companies/ibm.svg",
       "id": 4
     },
     {
       "name": "meta",
-      "path": "../../public/images/companies/meta.svg",
+      "path": "/images/companies/meta.svg",
       "id": 5
     },
     {
       "name": "microsoft",
-      "path": "../../public/images/companies/microsoft.webp",
+      "path": "/images/companies/microsoft.webp",
       "id": 6
     },
     {
       "name": "netflix",
-      "path": "../../public/images/companies/netflix.png",
+      "path": "/images/companies/netflix.png",
       "id": 7
     },
     {
       "name": "uber",
-      "path": "../../public/images/companies/uber.svg",
+      "path": "/images/companies/uber.svg",
       "id": 8
     }
   ]
