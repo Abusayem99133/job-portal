@@ -14,7 +14,7 @@ const Onboarding = () => {
         unsafeMetadata: { role },
       })
       .then(() => {
-        navigate(role === "recruiter" ? "/jobs-listing" : "/jobs");
+        navigate(role === "recruiter" ? "/jobs-post" : "/jobs-listing");
       })
       .catch((error) => {
         console.error("Error updating role:", error);
@@ -23,7 +23,9 @@ const Onboarding = () => {
   useEffect(() => {
     if (user?.unsafeMetadata?.role) {
       navigate(
-        user?.unsafeMetadata?.role === "recruiter" ? "/jobs-listing" : "/jobs"
+        user?.unsafeMetadata?.role === "recruiter"
+          ? "/jobs-post"
+          : "jobs-listing"
       );
     }
   }, [user]);
