@@ -14,8 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../select";
-import ApplyJob from "@/components/applyJob";
 import ApplicationCard from "@/components/ApplicationCard";
+import ApplyJob from "@/components/ApplyJob";
 
 const JobPage = () => {
   const { user, isLoaded } = useUser();
