@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../card";
 import companies from "../../../data/companies.json";
 import faqs from "../../../data/faqs.json";
 import Autoplay from "embla-carousel-autoplay";
+import logo from "../../../../public/images/logo.png";
 import {
   Accordion,
   AccordionContent,
@@ -20,11 +21,7 @@ const LandingPage = () => {
           Find Your Dream Job{" "}
           <span className="flex items-center gap-2 sm:gap-6">
             and get{" "}
-            <img
-              className="h-14 sm:h-20 lg:h-24"
-              src="/src/assets/images/logo.png"
-              alt="Hirrd Logo"
-            />
+            <img className="h-14 sm:h-20 lg:h-24" src={logo} alt="Hirrd Logo" />
           </span>
         </h1>
         <p className="text-gray-300 sm:mt-4 text-xs sm:text-xl">
