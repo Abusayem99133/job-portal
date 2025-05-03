@@ -55,87 +55,86 @@ const JobListing = () => {
     setLocation("");
   };
   return (
-    <div>
-      <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      <h1 className="gradient-title font-extrabold text-4xl sm:text-5xl md:text-6xl text-center pb-6 sm:pb-8">
         Latest Jobs
       </h1>
-      {/* add filters here */}
 
+      {/* Search bar */}
       <form
         onSubmit={handleSearch}
-        className="h-14 flex w-full gap-2 items-center mb-3"
+        className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center mb-6"
       >
         <Input
           type="text"
-          placeholder="Search Jobs by Title.."
-          className="h-full flex-1 px-4 text-md"
+          placeholder="Search Jobs by Title..."
+          className="flex-1 px-4 text-base h-12"
           name="search-query"
         />
-        <Button type="submit" className="h-full sm:w-28" variant="blue">
+        <Button type="submit" className="h-12 w-full sm:w-32" variant="blue">
           Search
         </Button>
       </form>
-      <div className="flex flex-col sm:flex-row gap-2">
+
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <Select value={location} onValueChange={(value) => setLocation(value)}>
-          <SelectTrigger>
+          <SelectTrigger className="w-full sm:w-1/3">
             <SelectValue placeholder="Filter by Location" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {State?.getStatesOfCountry("BD")?.map(({ name }) => {
-                return (
-                  <SelectItem key={name} value={name}>
-                    {name}
-                  </SelectItem>
-                );
-              })}
+              {State?.getStatesOfCountry("BD")?.map(({ name }) => (
+                <SelectItem key={name} value={name}>
+                  {name}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
+
         <Select
           value={company_id}
           onValueChange={(value) => setCompany_id(value)}
         >
-          <SelectTrigger>
+          <SelectTrigger className="w-full sm:w-1/3">
             <SelectValue placeholder="Filter by Company" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {companies?.map(({ name, id }) => {
-                return (
-                  <SelectItem key={name} value={id}>
-                    {name}
-                  </SelectItem>
-                );
-              })}
+              {companies?.map(({ name, id }) => (
+                <SelectItem key={name} value={id}>
+                  {name}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
+
         <Button
           onClick={clearFilters}
           variant="destructive"
-          className="sm:w-1/2"
+          className="w-full sm:w-1/3"
         >
           Clear Filters
         </Button>
       </div>
-      {/* {loadingJobs && (
-        <BarLoader className="mt-4 " width={"100%"} color="#36d7b7" />
-      )} */}
+
+      {/* Job cards */}
       {loadingJobs === false && (
-        <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
           {jobs?.length ? (
-            jobs?.map((job) => {
-              return (
-                <JobCard
-                  key={job?.id}
-                  job={job}
-                  savedInit={job?.saved?.length > 0}
-                />
-              );
-            })
+            jobs?.map((job) => (
+              <JobCard
+                key={job?.id}
+                job={job}
+                savedInit={job?.saved?.length > 0}
+              />
+            ))
           ) : (
-            <div>No Jobs Found 😥</div>
+            <div className="col-span-full text-center text-lg font-semibold text-gray-500">
+              No Jobs Found 😥
+            </div>
           )}
         </div>
       )}

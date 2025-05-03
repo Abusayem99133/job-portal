@@ -48,43 +48,52 @@ const JobPage = () => {
   }
   // console.log(job?.recruiter_id, user?.id);
   return (
-    <div className="flex flex-col gap-8 mt-5">
-      <div className="flex flex-col-reverse gap-6 md:flex-row justify-between items-center">
-        <h1 className="gradient-title font-extrabold pb-3 text-4xl sm:text-6xl">
+    <div className="flex flex-col gap-8 mt-5 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* Title and logo */}
+      <div className="flex flex-col-reverse md:flex-row justify-between items-start md:items-center gap-4">
+        <h1 className="gradient-title font-extrabold text-3xl sm:text-5xl">
           {job?.title}
         </h1>
-        <img src={job?.company?.logo_url} className="h-12" alt={job?.title} />
+        <img
+          src={job?.company?.logo_url}
+          className="h-10 sm:h-12 object-contain"
+          alt={job?.title}
+        />
       </div>
-      <div className="flex justify-between ">
-        <div>
-          <MapPinIcon />
+
+      {/* Location, Applicants, Status */}
+      <div className="flex flex-wrap gap-4 sm:gap-6 items-center text-gray-400 text-sm sm:text-base">
+        <div className="flex items-center gap-2">
+          <MapPinIcon className="h-5 w-5" />
           {job?.location}
         </div>
-        <div className="flex gap-2">
-          <Briefcase />
+        <div className="flex items-center gap-2">
+          <Briefcase className="h-5 w-5" />
           {job?.application?.length} Applicants
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           {job?.isOpen ? (
             <>
-              <DoorOpen /> Open
+              <DoorOpen className="h-5 w-5" /> Open
             </>
           ) : (
             <>
-              <DoorClosed /> Closed
+              <DoorClosed className="h-5 w-5" /> Closed
             </>
           )}
         </div>
       </div>
-      {/* hiring status  */}
 
+      {/* Hiring status control (only for recruiters) */}
       {job?.recruiter_id === user?.id && (
         <Select onValueChange={handleStatusChange}>
           <SelectTrigger
-            className={`w-full ${job?.isOpen ? "bg-green-950" : "bg-red-950"}`}
+            className={`w-full sm:w-1/2 md:w-1/3 ${
+              job?.isOpen ? "bg-green-950" : "bg-red-950"
+            } text-white`}
           >
             <SelectValue
-              placeholder={`Hiring Status  ${job?.isOpen ? "Open" : "Close"}`}
+              placeholder={`Hiring Status: ${job?.isOpen ? "Open" : "Closed"}`}
             />
           </SelectTrigger>
           <SelectContent>
@@ -93,17 +102,25 @@ const JobPage = () => {
           </SelectContent>
         </Select>
       )}
-      <h2 className="text-2xl sm:text-3xl font-bold">About the job</h2>
-      <p className="sm:text-lg ">{job?.description}</p>
-      <h2 className="text-2xl sm:text-3xl font-bold">
-        What we are looking for
-      </h2>
-      <MDEditor.Markdown
-        source={job?.requirments}
-        className="bg-transparent sm:text-lg"
-      />
-      {/* render applications  */}
 
+      {/* About the job */}
+      <section>
+        <h2 className="text-xl sm:text-2xl font-bold mb-2">About the job</h2>
+        <p className="text-base sm:text-lg text-gray-400">{job?.description}</p>
+      </section>
+
+      {/* Requirements */}
+      <section>
+        <h2 className="text-xl sm:text-2xl font-bold mb-2">
+          What we are looking for
+        </h2>
+        <MDEditor.Markdown
+          source={job?.requirments}
+          className="bg-transparent text-sm sm:text-base"
+        />
+      </section>
+
+      {/* Apply job (for non-owners) */}
       {job?.recruiter_id !== user.id && (
         <div className="w-full">
           <ApplyJob
@@ -116,16 +133,15 @@ const JobPage = () => {
           />
         </div>
       )}
-      {job?.application?.length > 0 && job?.recruiter_id === user?.id && (
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl sm:text-3xl font-bold">Applications</h2>
 
-          {job?.application?.map((application) => {
-            return (
-              <ApplicationCard key={application.id} application={application} />
-            );
-          })}
-        </div>
+      {/* Application list (for recruiters only) */}
+      {job?.application?.length > 0 && job?.recruiter_id === user?.id && (
+        <section className="flex flex-col gap-2">
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">Applications</h2>
+          {job?.application?.map((application) => (
+            <ApplicationCard key={application.id} application={application} />
+          ))}
+        </section>
       )}
     </div>
   );
